@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 
 var app = express();
@@ -10,6 +12,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(bodyParser.json());
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -45,10 +50,12 @@ app.use(
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var eventRouter = require('./routes/event');
 var errorController = require('./controllers/error')
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/events', eventRouter);
+app.use('/', indexRouter);
 app.use(errorController.get404)
 
 
