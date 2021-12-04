@@ -1,4 +1,6 @@
-const Teacher = require('../models/teacher');
+const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
+const Teacher = require('../../models/teacher');
 
 exports.getSignupTeacher = (req, res, next) => {
     let message = req.flash('error');
@@ -7,7 +9,8 @@ exports.getSignupTeacher = (req, res, next) => {
     } else {
       message = null;
     }
-    res.render('auth/signup-teacher', {
+    //'auth/signup-teacher'
+    res.send({
       path: '/signup-teacher',
       pageTitle: 'Signup Teacher',
       errorMessage: message,
@@ -33,7 +36,7 @@ exports.postSignupTeacher = (req, res, next) => {
     const errors = validationResult(req);
     // if there are errors , render the same page (with user-entered info.)
     if (!errors.isEmpty()) {
-        return res.status(422).render('auth/signup', {
+        return res.status(422).send({
         path: '/signup-teacher',
         pageTitle: 'Signup Teacher',
         errorMessage: errors.array()[0].msg,

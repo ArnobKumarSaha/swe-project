@@ -1,8 +1,7 @@
 const bcrypt = require('bcryptjs');
-
 const { validationResult } = require('express-validator');
 // validate (Check) on the auth route file, And get the result here .. In auth Controller file.
-const Student = require('../models/student');
+const Student = require('../../models/student');
 
 
 exports.getSignupStudent = (req, res, next) => {
@@ -12,7 +11,8 @@ exports.getSignupStudent = (req, res, next) => {
   } else {
     message = null;
   }
-  res.render('auth/signup-student', {
+  //'auth/signup-student'
+  res.send({
     path: '/signup-student',
     pageTitle: 'Signup Student',
     errorMessage: message,
@@ -38,7 +38,7 @@ exports.postSignupStudent = (req, res, next) => {
   const errors = validationResult(req);
   // if there are errors , render the same page (with user-entered info.)
   if (!errors.isEmpty()) {
-    return res.status(422).render('auth/signup-student', {
+    return res.status(422).send({
       path: '/signup-student',
       pageTitle: 'Signup Student',
       errorMessage: errors.array()[0].msg,

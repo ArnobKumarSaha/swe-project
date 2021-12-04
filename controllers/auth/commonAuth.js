@@ -2,9 +2,9 @@ const bcrypt = require('bcryptjs');
 
 const { validationResult } = require('express-validator');
 // validate (Check) on the auth route file, And get the result here .. In auth Controller file.
-const Student = require('../models/student');
-const Teacher = require('../models/teacher');
-const Admin = require("../models/admin");
+const Student = require('../../models/student');
+const Teacher = require('../../models/teacher');
+const Admin = require("../../models/admin");
 
 exports.getLogin = (req, res, next) => {
   // If any logIn error occurs, flashing can be done on postLogin
@@ -14,7 +14,8 @@ exports.getLogin = (req, res, next) => {
   } else {
     message = null;
   }
-  res.render('auth/login', {
+  //'auth/login', 
+  res.send({
     path: '/login',
     pageTitle: 'Login',
     errorMessage: message,
@@ -27,7 +28,7 @@ exports.getLogin = (req, res, next) => {
 };
 
 function loginHelper(req,res,errors){
-  res.status(422).render('auth/login', {
+  res.status(422).send( {
     path: '/login',
     pageTitle: 'Login',
     errorMessage: errors.array()[0].msg,
@@ -72,7 +73,7 @@ exports.postLogin = (req, res, next) => {
             }
             // Incorrect password entered.
 
-            return res.status(422).render('auth/login', {
+            return res.status(422).send({
               path: '/login',
               pageTitle: 'Login',
               errorMessage: 'Invalid email or password',
@@ -110,7 +111,7 @@ exports.postLogin = (req, res, next) => {
           }
           // Incorrect password entered.
 
-          return res.status(422).render('auth/login', {
+          return res.status(422).send({
             path: '/login',
             pageTitle: 'Login',
             errorMessage: 'Invalid email or password',
@@ -148,7 +149,7 @@ exports.postLogin = (req, res, next) => {
           }
           // Incorrect password entered.
 
-          return res.status(422).render('auth/login', {
+          return res.status(422).send({
             path: '/login',
             pageTitle: 'Login',
             errorMessage: 'Invalid email or password',
