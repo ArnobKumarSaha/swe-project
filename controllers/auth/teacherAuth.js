@@ -34,7 +34,7 @@ exports.postSignupTeacher = (req, res, next) => {
     const designation = req.body.designation;
 
     const errors = validationResult(req);
-    // if there are errors , render the same page (with user-entered info.)
+    // if there are errors , send the same page (with user-entered info.)
     if (!errors.isEmpty()) {
         return res.status(422).send({
         path: '/signup-teacher',

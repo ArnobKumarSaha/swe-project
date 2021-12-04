@@ -1,9 +1,8 @@
 
 module.exports = (req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedIn;
-    res.locals.csrfToken = req.csrfToken();
-    res.locals.currentUserName = " papapa";
-    res.locals.typeOfUser = " kichu ekta";
+    res.locals.currentUserName = "user name";
+    res.locals.typeOfUser = "user type";
     if(res.locals.isAuthenticated){
       res.locals.currentUserName = req.user.name;
       res.locals.typeOfUser = req.session.typeOfUser;

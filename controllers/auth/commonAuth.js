@@ -47,7 +47,7 @@ exports.postLogin = (req, res, next) => {
   const typeOfUser = req.body.typeOfUser;
 
   const errors = validationResult(req);
-  // if there are errors , render the same page (with user-entered info.)
+  // if there are errors , send the same page (with user-entered info.)
   if (!errors.isEmpty()) {
     return loginHelper(req,res,errors);
   }

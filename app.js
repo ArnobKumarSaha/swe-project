@@ -34,8 +34,8 @@ const MONGODB_URI = "mongodb+srv://arnobkumarsaha:sustcse16@cluster0.nj6lk.mongo
 
 const store = new MongoDBStore({
   uri: MONGODB_URI,
-  collection: 'sessions'
 });
+  collection: 'sessions'
 
 app.use(
   session({
@@ -50,17 +50,37 @@ app.use(
 // -----------------------------------------------------------------------------------
 
 app.use(flash())
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var eventRouter = require('./routes/event');
-var errorController = require('./controllers/error')
-var authRouter = require('./routes/authRoute')
+// Check if the requester is authenticated or not
+const checkType = require('./utils/checkTypeOfUser');
+app.use(checkType);
 
-app.use('/users', usersRouter);
+// isLoggedIn, user and typeOfUser of req.session are set in postLogin of authController
+// But Note that , req.user is set in the above middleware.
+// res.locals variables are passed to every views.
+const setLocals = require('./utils/setReqLocals');
+app.use(setLocals);
+
+var indexRouter = require('./routes/index')
+var usersRouter = require('./routes/user')
+var eventRouter = require('./routes/event')
+var errorRouter = require('./routes/error')
+var authRouter = require('./routes/authRoute')
+var studentRouter = require('./routes/student')
+var teacherRouter = require('./routes/teacher')
+var adminRouter = require("./routes/admin")
+
+var isStudent = require('./utils/middleware/is-Student')
+var isTeacher = require('./utils/middleware/is-Teacher')
+var isAdmin = require('./utils/middleware/is-Admin')
+
+app.use('/user', usersRouter);
 app.use('/events', eventRouter);
+app.use('/student', isStudent, studentRouter);
+app.use('/teacher', isTeacher, teacherRouter);
+app.use('/admin', isAdmin, adminRouter);
 app.use('/', indexRouter);
-app.use(authRouter)
-app.use(errorController.get404)
+app.use(authRouter);
+app.use(errorRouter);
 
 
 mongoose.connect(
