@@ -75,9 +75,9 @@ var isAdmin = require('./utils/middleware/is-Admin')
 
 app.use('/user', usersRouter);
 app.use('/events', eventRouter);
-app.use('/student', isStudent, studentRouter);
-app.use('/teacher', isTeacher, teacherRouter);
-app.use('/admin', isAdmin, adminRouter);
+app.use('/student', studentRouter); //isStudent
+app.use('/teacher', teacherRouter);
+app.use('/admin', adminRouter);
 app.use('/', indexRouter);
 app.use(authRouter);
 app.use(errorRouter);

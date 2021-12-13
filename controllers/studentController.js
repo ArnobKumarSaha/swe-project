@@ -71,8 +71,9 @@ exports.postAddProject = async (req, res, next) => {
 
   let studentId;
   try{
-    const s = await Student.findOne({regNo: studentreg});
-    studentId = studentId._id;
+    const s = await Student.findOne({regNo: studentReg});
+    console.log(s, studentReg)
+    studentId = s._id;
   }
   catch(e){
     console.log(e);

@@ -49,6 +49,7 @@ exports.postLogin = (req, res, next) => {
   const errors = validationResult(req);
   // if there are errors , send the same page (with user-entered info.)
   if (!errors.isEmpty()) {
+
     return loginHelper(req,res,errors);
   }
 
@@ -68,7 +69,8 @@ exports.postLogin = (req, res, next) => {
               req.session.typeOfUser = typeOfUser;
               return req.session.save(err => {
                 console.log('err = ', err);
-                res.redirect('/user');
+                // res.redirect('/user');
+                res.send({ "user": req.session.user})
               });
             }
             // Incorrect password entered.
