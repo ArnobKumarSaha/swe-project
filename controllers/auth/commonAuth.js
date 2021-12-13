@@ -177,4 +177,17 @@ exports.postLogout = (req, res, next) => {
   });
 };
 
+exports.isLoggedIn = (req, res, next) => {
+  if(req.session != null){
+    if(req.session.isLoggedIn){
+      res.send({ isLoggedIn: true })
+    }
+    else{
+      res.send({ isLoggedIn: false })
+    }
+  }else{
+    res.send({ isLoggedIn: false })
+  }
+};
+
   

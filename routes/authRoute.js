@@ -136,4 +136,6 @@ router.post("/signup-teacher",
 
 router.post("/logout", commonAuthController.postLogout);
 
+router.get("/isloggedin", commonAuthController.isLoggedIn)
+
 module.exports = router;
