@@ -39,3 +39,8 @@ There are three types of Users in this project. Student, Teacher & Admin.
 2) Teacher can register in this system by themselves. See & edit their Profiles pages. Accept the thesis request requests added by Students.
 
 3) Admin has some super-powers. They can't register directly though. We have set an Admin hardcoded in the Database , as they cant register themselves. Admins can add other admins. Add, edit & delete teachers . Add, edit and delete courses. etc.
+
+
+### Presentation Video
+
+https://www.youtube.com/watch?v=bj-pmHOChSM
